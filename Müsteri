@@ -1,0 +1,139 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Musteri : KisiselBilgiler
+    {
+
+        // sınıfın değişkenleri
+        private int firmaKodu;
+        private String firmaUnvani;
+        private String vergiDairesi;
+        private String vergiNumarasi;
+        private String faks;
+        private String web;
+
+
+        public Musteri()
+        {
+            
+        }
+
+        // sınıfın sahip olduğu nesneler
+        private ArrayList Faturalar = new ArrayList();
+        private ArrayList Irsaliyeler = new ArrayList();
+        private ArrayList Teklifler = new ArrayList();
+        private ArrayList Siparisler = new ArrayList();
+        private ArrayList Senetler = new ArrayList();
+
+        // sınıfın methotları
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+
+        public DataTable tumMusterileriGetir()
+        {
+            string secme = "select * from Musteri";
+            vt.baglan(secme, "Musteri");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+            vt.baglantiKes();
+            return veriTablosu;
+        }
+        public Boolean musteriGetir(String firmaKodu)
+        {
+            string secme = "select * from Musteri where firmaKodu=" + firmaKodu  ;
+            vt.baglanCommand(secme);
+            if (vt.oku.HasRows == true)
+            {
+                this.firmaKodu = Convert.ToInt32(firmaKodu); 
+                this.FirmaUnvani = vt.oku.GetValue(1).ToString();
+                this.Adi = vt.oku.GetValue(2).ToString();
+                this.SoyAdi = vt.oku.GetValue(3).ToString();
+                this.VergiDairesi = vt.oku.GetValue(4).ToString();
+                this.VergiNumarasi = vt.oku.GetValue(5).ToString();
+                this.Tc = vt.oku.GetValue(6).ToString();
+                this.Adres = vt.oku.GetValue(7).ToString();
+                this.Telefon = vt.oku.GetValue(8).ToString();
+                this.Gsm = vt.oku.GetValue(9).ToString();
+                this.Faks = vt.oku.GetValue(10).ToString();
+                this.EPosta = vt.oku.GetValue(11).ToString();
+                this.Web = vt.oku.GetValue(12).ToString();
+                vt.baglantiKes();
+                return true;
+            }
+            vt.baglantiKes();
+            return false;
+        }
+
+        public Boolean musteriEklee() 
+        {      
+            string sorgu = "INSERT INTO Musteri (firmaUnvan,ad,soyAd,vergiDairesi,vergiNo,tcNo,adres,tel,gsm,fax,eposta,web)" +
+                            "VALUES ('" + this.FirmaUnvani + "','" + this.Adi + "','"
+                            + this.SoyAdi + "','" + this.VergiDairesi + "','" + this.VergiNumarasi + "','"
+                            + this.Tc + "','" + this.Adres + "','" + this.Telefon + "','"
+                            + this.Gsm + "','" + this.Faks + "','" + this.EPosta + "','" + this.Web + "')"; 
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+        }
+
+        public Boolean musteriGuncelle()
+        {
+
+            String sorgu = "UPDATE Musteri SET firmaUnvan='"  + this.FirmaUnvani + "',ad='" + this.Adi +
+                           "',soyAd='" + this.SoyAdi + "',vergiDairesi='" + this.VergiDairesi + "',vergiNo='" + this.VergiNumarasi +
+                           "',tcNo='" + this.Tc + "',adres='" + this.Adres + "',tel='" + this.Telefon +
+                           "',gsm='" + this.Gsm + "',fax='" + this.Faks + "',eposta='" + this.EPosta + "',web='" + this.Web + "' WHERE firmaKodu="+this.firmaKodu;
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+        }
+
+        public Boolean musteriSil()
+        {
+            String sorgu = "DELETE FROM Musteri WHERE firmaKodu=" + this.firmaKodu;
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+
+        }
+
+//----------------------------------------------------------------------------
+        public int FirmaKodu
+        {
+            get { return firmaKodu; }
+            set { firmaKodu = value; }
+        }
+        public String FirmaUnvani
+        {
+            get { return firmaUnvani; }
+            set { firmaUnvani = value; }
+        }
+        public String VergiDairesi
+        {
+            get { return vergiDairesi; }
+            set { vergiDairesi = value; }
+        }
+        public String VergiNumarasi
+        {
+            get { return vergiNumarasi; }
+            set { vergiNumarasi = value; }
+        }
+        public String Faks
+        {
+            get { return faks; }
+            set { faks = value; }
+        }
+        public String Web
+        {
+            get { return web; }
+            set { web = value; }
+        }
+    }
+}
