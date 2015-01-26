@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Depo:Rapor
+    {
+        // sınıfın değişkenleri
+        private int depoKodu;
+        private String depoAdi;
+        private int depoKapasitesi;
+        private String depoBirimi;
+        private String depoTuru;
+
+        // sınıfın sahip olduğu nesneler
+
+        // sınıfın methotları
+        public void depoEkle() { }
+        public void depoBilgileriniDuzenle() { }
+        public void depoSil() { }
+        public void raporla() { }
+    }
+}
