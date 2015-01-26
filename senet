@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Senet : Sablon
+    {
+        // sınıfın değişkenleri
+        private int senetNo;
+        private double tutar;
+        private DateTime odemeTarihi;
+        private long vergiNumarasi;
+        private String kefilAdi;
+        private String kefilSoyAdi;
+        private long kefilTc;
+
+        // sınıfın methotları
+        public void sablonOlustur() { }
+        public void raporla() { }
+        public void senetYap() { }
+    }
+}
