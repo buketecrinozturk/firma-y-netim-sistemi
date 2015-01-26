@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public abstract class KisiselBilgiler
+    {
+        // sınıfın değişkenleri
+        private String tc;
+        private String adi;
+        private String soyAdi;
+        private String adres;
+        private String telefon;
+        private String gsm;
+        private String ePosta;
+
+        public String Tc
+        {
+            get { return tc; }
+            set { tc = value; }
+        }
+        public String Adi
+        {
+            get { return adi; }
+            set { adi = value; }
+        }
+        
+        public String SoyAdi
+        {
+            get { return soyAdi; }
+            set { soyAdi = value; }
+        }
+        
+
+        public String Adres
+        {
+            get { return adres; }
+            set { adres = value; }
+        }
+        
+        public String Telefon
+        {
+            get { return telefon; }
+            set { telefon = value; }
+        }
+        
+        public String Gsm
+        {
+            get { return gsm; }
+            set { gsm = value; }
+        }
+        
+        public String EPosta
+        {
+            get { return ePosta; }
+            set { ePosta = value; }
+        }
+    }
+}
