@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Fatura : ResmiIsler
+    {
+        // sınıfın değişkenleri
+        private int faturaNo;
+
+        public int FaturaNo
+        {
+            get { return faturaNo; }
+            set { faturaNo = value; }
+        }
+        private int irsaliyeNo;
+
+        public int IrsaliyeNo
+        {
+            get { return irsaliyeNo; }
+            set { irsaliyeNo = value; }
+        }
+        private double yekun;
+
+        public double Yekun
+        {
+            get { return yekun; }
+            set { yekun = value; }
+        }
+        private double kdv;
+
+        public double Kdv
+        {
+            get { return kdv; }
+            set { kdv = value; }
+        }
+        private double toplam;
+
+        public double Toplam
+        {
+            get { return toplam; }
+            set { toplam = value; }
+        }
+        private String yalniz;
+
+        public String Yalniz
+        {
+            get { return yalniz; }
+            set { yalniz = value; }
+        }
+        private Boolean odendiMi;
+
+        public Boolean OdendiMi
+        {
+            get { return odendiMi; }
+            set { odendiMi = value; }
+        }
+        private Boolean alisMi;
+
+        public Boolean AlisMi
+        {
+            get { return alisMi; }
+            set { alisMi = value; }
+        }
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+        // sınıfın methotları
+
+        public Boolean faturaEkle()
+        {
+        
+            String sorgu = "INSERT INTO Fatura (faturaNo,irsaliyeNo,yekun,kdv,toplam,odendiMi,alisMi)" +
+                            "VALUES (" + this.faturaNo + "," + this.irsaliyeNo + "," + this.yekun + ","
+                            + this.kdv + "," + this.toplam + "," + this.odendiMi + "," + this.alisMi + ")";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+
+
+            return true;
+        }
+
+        public DataTable tumFaturalariGetir()
+        {
+            string secme = "select * from Fatura";
+            vt.baglan(secme, "Fatura");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+            vt.baglantiKes();
+            return veriTablosu;
+
+        }
+
+    }
+}
