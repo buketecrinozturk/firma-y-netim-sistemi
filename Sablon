@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public abstract class Sablon: KisiselBilgiler,Rapor
+    {
+        // sınıfın değişkenleri
+        private String musteriUnvani;
+
+        public String MusteriUnvani
+        {
+            get { return musteriUnvani; }
+            set { musteriUnvani = value; }
+        }
+        private String tarih;
+
+        public String Tarih
+        {
+            get { return tarih; }
+            set { tarih = value; }
+        }
+
+
+        private String faks;
+
+        public String Faks
+        {
+            get { return faks; }
+            set { faks = value; }
+        }
+        private String web;
+
+        public String Web
+        {
+            get { return web; }
+            set { web = value; }
+        }
+
+        // sınıfın methotları
+        public void sablonOlustur() { }
+        public void raporla() { }
+    }
+}
