@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    
+    public class SiparisKes
+    {
+        private int siparisKodu;
+
+        public int SiparisKodu
+        {
+            get { return siparisKodu; }
+            set { siparisKodu = value; }
+        }
+        private int firmaKodu;
+
+        public int FirmaKodu
+        {
+            get { return firmaKodu; }
+            set { firmaKodu = value; }
+        }
+        private int urunKodu;
+
+        public int UrunKodu
+        {
+            get { return urunKodu; }
+            set { urunKodu = value; }
+        }
+        private int miktar;
+
+        public int Miktar
+        {
+            get { return miktar; }
+            set { miktar = value; }
+        }
+        private String birim;
+
+        public String Birim
+        {
+            get { return birim; }
+            set { birim = value; }
+        }
+        private double birimFiyati;
+
+        public double BirimFiyati
+        {
+            get { return birimFiyati; }
+            set { birimFiyati = value; }
+        }
+        private double toplam;
+
+        public double Toplam
+        {
+            get { return toplam; }
+            set { toplam = value; }
+        }
+        private String tarih;
+
+        public String Tarih
+        {
+            get { return tarih; }
+            set { tarih = value; }
+        }
+
+//-----------------------------------------------------------
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+        public Boolean siparisSatiriEkle()
+        {
+            string sorgu = "INSERT INTO SiparisYap (siparisKodu,firmaKodu,urunKodu,miktar,birim,birimFiyati,toplam,tarih)" +
+                            "VALUES (" + this.siparisKodu + "," + this.firmaKodu + ","
+                            + this.urunKodu + "," + this.miktar + ",'" + this.birim + "',"
+                            + this.birimFiyati + "," + this.toplam + ",'" + this.tarih + "')";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+
+        }
+
+        public DataTable tumSiparisSatirlariniGetir()
+        {
+            string secme = "select * from SiparisYap WHERE siparisKodu=" + this.siparisKodu;
+            vt.baglan(secme, "SiparisYap");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+
+            vt.baglantiKes();
+            return veriTablosu;
+        }
+
+    }
+}
