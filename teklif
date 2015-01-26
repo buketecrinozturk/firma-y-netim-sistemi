@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Teklif:ResmiOlmayanIsler
+    {
+        // sınıfın değişkenleri
+        private int teklifKodu;
+
+        public int TeklifKodu
+        {
+            get { return teklifKodu; }
+            set { teklifKodu = value; }
+        }
+        private String onayTarihi;
+
+        public String OnayTarihi
+        {
+            get { return onayTarihi; }
+            set { onayTarihi = value; }
+        }
+
+
+        private double fiyat;
+
+        public double Fiyat1
+        {
+            get { return fiyat; }
+            set { fiyat = value; }
+        }
+
+        // sınıfın methotları
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+
+        public Boolean teklifEkle()
+        {
+
+            String sorgu = "INSERT INTO Teklif (teklifKodu,tarih,odemeTuru,fiyat,onayTarihi,sure)" +
+                            "VALUES (" + this.teklifKodu + ",'" + this.Tarih + "','Pesin',"
+                            + this.Fiyat + ",'Onaylanmadi'," + 5 + ")";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+
+
+            return true;
+        }
+
+        public DataTable tumTeklifleriGetir()
+        {
+            string secme = "select * from Teklif";
+            vt.baglan(secme, "Teklif");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+            vt.baglantiKes();
+            return veriTablosu;
+
+        }
+
+    } 
+}
