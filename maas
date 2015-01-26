@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Maas
+    {
+        // sınıfın değişkenleri
+        private double aylikMaas;
+        private double avans;
+        private int mesaiSaati;
+        private double mesaiSaatUcreti;
+        private double maasTutari;
+
+        // sınıfın methotları
+        public void maasDuzenle() { }
+        public void avansVer() { }
+        public void mesaiSaatUcretiAyarla() { }
+        public void maasHesapla() { }
+        public void maasOde() { }
+
+    }
+}
