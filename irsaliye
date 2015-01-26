@@ -1,0 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Irsaliye:ResmiIsler
+    {
+        // sınıfın değişkenleri
+        private int irsaliyeNo;
+        private DateTime fiiliSevkTarihi;
+
+        // sınıfın methotları
+        public void sablonOlustur() { }
+        public void raporla() { }
+        public void irsaliyeKes() { }
+
+    }
+}
