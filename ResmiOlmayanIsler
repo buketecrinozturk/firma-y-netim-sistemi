@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public abstract class ResmiOlmayanIsler: Sablon
+    {
+        // sınıfın değişkenleri
+        private double fiyat;
+
+        public double Fiyat
+        {
+            get { return fiyat; }
+            set { fiyat = value; }
+        }
+        private String odemeTuru;
+
+        public String OdemeTuru
+        {
+            get { return odemeTuru; }
+            set { odemeTuru = value; }
+        }
+        private int sure;
+
+        public int Sure
+        {
+            get { return sure; }
+            set { sure = value; }
+        }
+        private String ekBilgi;
+
+        protected String EkBilgi
+        {
+            get { return ekBilgi; }
+            set { ekBilgi = value; }
+        }
+        private String yaziMetni;
+
+        public String YaziMetni
+        {
+            get { return yaziMetni; }
+            set { yaziMetni = value; }
+        }
+
+        // sınıfın sahip olduğu nesneler
+        private ArrayList Urunler = new ArrayList();
+
+        // sınıfın methotları
+        public void sablonOlustur() { }
+        public void raporla() { }
+
+     }// end class ResmiOlmayanIsler
+}
