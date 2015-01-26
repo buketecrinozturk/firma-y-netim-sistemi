@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public abstract class ResmiIsler:Sablon
+    {
+        // sınıfın değişkenleri
+        protected String vergiDairesi;
+        protected long vergiNumarasi;
+
+        // sınıfın sahip olduğu nesneler
+        private ArrayList Urunler = new ArrayList();
+
+        // sınıfın methotları
+        public void sablonOlustur() { }
+        public void raporla() { }
+
+     }// end class ResmiIsler:Sablon
+   
+} // end namespace FirmaYonetimSistemi.Class
