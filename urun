@@ -1,0 +1,162 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Urun
+    {
+        // sınıfın değişkenleri
+        private int urunKodu;
+        private String urunAdi;
+        private String urunCinsi;
+        private String urunMarkasi;
+        private int urunMiktari;
+        private String birimi;
+        private int kdvOrani;
+        private int iskontoOrani;
+        private double alisFiyati;
+        private double satisFiyati;
+        private int minSayi;
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+
+        public Urun()
+        {
+        }
+
+        // sınıfın methotları
+
+        public DataTable tumUrunleriGetir()
+        {
+            string secme = "select * from Urun";
+            vt.baglan(secme, "Urun");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+            vt.baglantiKes();
+            return veriTablosu;
+        }
+
+        public Boolean urunGetir(String urunKodu)
+        {
+            string secme = "select * from Urun where urunKodu=" + urunKodu;
+            vt.baglanCommand(secme);
+            if (vt.oku.HasRows == true)
+            {
+                this.urunKodu = Convert.ToInt32(urunKodu); ;
+                this.urunAdi = vt.oku.GetValue(1).ToString();
+                this.urunCinsi = vt.oku.GetValue(2).ToString();
+                this.urunMarkasi = vt.oku.GetValue(3).ToString();
+                this.urunMiktari = Convert.ToInt32(vt.oku.GetValue(4));
+                this.birimi = vt.oku.GetValue(5).ToString();
+                this.kdvOrani = Convert.ToInt32(vt.oku.GetValue(6));
+                this.iskontoOrani = Convert.ToInt32(vt.oku.GetValue(7));
+                this.alisFiyati = Convert.ToDouble(vt.oku.GetValue(8));
+                this.satisFiyati = Convert.ToDouble(vt.oku.GetValue(9));
+                this.minSayi = Convert.ToInt32(vt.oku.GetValue(10));
+                vt.baglantiKes();
+                return true;
+            }
+            vt.baglantiKes();
+            return false;
+        }
+
+        public Boolean urunEkle()
+        {
+            string sorgu = "INSERT INTO Urun (urunAdi,urunCinsi,urunMarkasi,urunMiktari,birimi,kdvOrani,iskontoOrani,alisFiyati,satisFiyati,minSayi,depoKodu)" +
+                            "VALUES ('" + this.urunAdi + "','" + this.urunCinsi + "','"
+                            + this.urunMarkasi + "'," + this.urunMiktari + ",'" + this.birimi + "',"
+                            + this.kdvOrani + "," + this.iskontoOrani + "," + this.alisFiyati + ","
+                            + this.satisFiyati + "," + this.minSayi + "," + 1 + ")";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+        }
+
+        public Boolean urunGuncelle()
+        {
+
+            String sorgu = "UPDATE Urun SET urunAdi='" + this.urunAdi + "',urunCinsi='" + this.urunCinsi +
+                           "',urunMarkasi='" + this.urunMarkasi + "',urunMiktari=" + this.urunMiktari + ",birimi='" + this.birimi +
+                           "',kdvOrani=" + this.kdvOrani + ",iskontoOrani=" + this.iskontoOrani + ",alisFiyati=" + this.alisFiyati +
+                           ",satisFiyati=" + this.satisFiyati + ",minSayi=" + this.minSayi + ",depoKodu=" + 1 + " WHERE urunKodu=" + this.urunKodu;
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+        }
+
+        public Boolean urunuSil()
+        {
+            String sorgu = "DELETE FROM Urun WHERE firmaKodu=" + this.urunKodu;
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+
+        }
+
+
+
+
+//--------------------------------------------------------
+
+        public int UrunKodu
+        {
+            get { return urunKodu; }
+            set { urunKodu = value; }
+        }
+        public String UrunAdi
+        {
+            get { return urunAdi; }
+            set { urunAdi = value; }
+        }
+        public String UrunCinsi
+        {
+            get { return urunCinsi; }
+            set { urunCinsi = value; }
+        }
+        public String UrunMarkasi
+        {
+            get { return urunMarkasi; }
+            set { urunMarkasi = value; }
+        }
+        public int UrunMiktari
+        {
+            get { return urunMiktari; }
+            set { urunMiktari = value; }
+        }
+        public String Birimi
+        {
+            get { return birimi; }
+            set { birimi = value; }
+        }
+        public int KdvOrani
+        {
+            get { return kdvOrani; }
+            set { kdvOrani = value; }
+        }
+        public int IskontoOrani
+        {
+            get { return iskontoOrani; }
+            set { iskontoOrani = value; }
+        }
+        public double AlisFiyati
+        {
+            get { return alisFiyati; }
+            set { alisFiyati = value; }
+        }
+        public double SatisFiyati
+        {
+            get { return satisFiyati; }
+            set { satisFiyati = value; }
+        }
+        public int MinSayi
+        {
+            get { return minSayi; }
+            set { minSayi = value; }
+        }
+
+    }
+}
