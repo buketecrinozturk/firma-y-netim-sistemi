@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.OleDb;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Kullanici
+    {
+        // sınıfın değişkenleri
+        private int kullaniciKodu;
+        private String kullaniciAdi;
+        private String sifre;
+        private String adi;
+        private String soyAdi;
+        private String gorevi;
+
+        public Kullanici() {
+
+        }
+
+        // sınıfın methotları
+        public void kullaniciEkle() { }
+        public void kullaniciBilgileriniDuzenle() { }
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+
+        public Boolean girisYap(String kullaniciAdi , String sifre){
+
+            string secme = "select * from Kullanici"; 
+            vt.baglan(secme, "Kullanici");
+            int ToplamKayit = vt.veriSeti.Tables["Kullanici"].Rows.Count; // kaç satır varsa
+            while (vt.gecerliKayitNo!=ToplamKayit)
+            {
+                DataRow dr = vt.veriSeti.Tables["Kullanici"].Rows[vt.gecerliKayitNo]; // tablodaki kaçıncı kayıtı seçeceğiz.
+                if ( dr["kullaniciAdi"].ToString() == kullaniciAdi && dr["sifre"].ToString() == sifre ) {
+
+                     this.kullaniciAdi =  dr["kullaniciAdi"].ToString();
+                     this.sifre = dr["sifre"].ToString();
+                     this.adi = dr["adi"].ToString();
+                     this.soyAdi = dr["soyAdi"].ToString();
+                     this.gorevi = dr["gorevi"].ToString();
+                    return true;
+                }
+                vt.gecerliKayitNo++;
+            } // while end
+
+            return false;            
+        } // girisYap end
+
+        public Boolean girisYapCommand(String kullaniciAdi, String sifre)
+        {
+
+            string secme = "Select * from Kullanici where kullaniciAdi='" + kullaniciAdi + "' AND sifre='"+sifre +"'" ;
+            vt.baglanCommand(secme);
+
+            if (vt.oku.HasRows == true)
+            {
+                this.kullaniciAdi = vt.oku.GetValue(2).ToString();
+                this.sifre = vt.oku.GetValue(3).ToString();
+                this.adi = vt.oku.GetValue(4).ToString();
+                this.soyAdi = vt.oku.GetValue(5).ToString();
+
+                return true;
+            }
+
+            return false;
+        } // girisYapCommand end
+       
+
+        }
+    }
