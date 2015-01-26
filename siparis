@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Siparis:ResmiOlmayanIsler
+    {
+        // sınıfın değişkenleri
+        private int siparisKodu;
+
+        public int SiparisKodu
+        {
+            get { return siparisKodu; }
+            set { siparisKodu = value; }
+        }
+        private String siparisTeslimTarihi;
+
+        public String SiparisTeslimTarihi
+        {
+            get { return siparisTeslimTarihi; }
+            set { siparisTeslimTarihi = value; }
+        }
+
+        // sınıfın methotları
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+
+        public Boolean siparisEkle()
+        {
+
+            String sorgu = "INSERT INTO Siparis (siparisKodu,tarih,odemeTuru,fiyat,onayTarihi,sure)" +
+                            "VALUES (" + this.siparisKodu + ",'" + this.Tarih + "','Pesin',"
+                            + this.Fiyat + ",'Onaylanmadi'," + 5 + ")";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+
+
+            return true;
+        }
+
+        public DataTable tumSiparisleriGetir()
+        {
+            string secme = "select * from Siparis";
+            vt.baglan(secme, "Siparis");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+            vt.baglantiKes();
+            return veriTablosu;
+
+        }
+    }
+}
