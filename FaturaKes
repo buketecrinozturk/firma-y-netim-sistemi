@@ -1,0 +1,125 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class FaturaKes
+    {
+
+
+
+        private int faturaNo;
+        public int FaturaNo
+        {
+            get { return faturaNo; }
+            set { faturaNo = value; }
+        }        
+        private int firmaKodu;
+        public int FirmaKodu
+        {
+            get { return firmaKodu; }
+            set { firmaKodu = value; }
+        }
+        private int urunKodu;
+        public int UrunKodu
+        {
+            get { return urunKodu; }
+            set { urunKodu = value; }
+        }
+        private int satilanMiktar;
+        public int SatilanMiktar
+        {
+            get { return satilanMiktar; }
+            set { satilanMiktar = value; }
+        }
+        private String urunBirimi;
+        public String UrunBirimi
+        {
+            get { return urunBirimi; }
+            set { urunBirimi = value; }
+        }
+        private double birimFiyati;
+        public double BirimFiyati
+        {
+            get { return birimFiyati; }
+            set { birimFiyati = value; }
+        }
+        private double urunYekun;
+        public double UrunYekun
+        {
+            get { return urunYekun; }
+            set { urunYekun = value; }
+        }
+        private double urunKdv;
+        public double UrunKdv
+        {
+            get { return urunKdv; }
+            set { urunKdv = value; }
+        }
+        private double urunToplam;
+        public double UrunToplam
+        {
+            get { return urunToplam; }
+            set { urunToplam = value; }
+        }
+        private String tarih;
+        public String Tarih
+        {
+            get { return tarih; }
+            set { tarih = value; }
+        }
+        private int irsaliyeNo;
+        public int IrsaliyeNo
+        {
+            get { return irsaliyeNo; }
+            set { irsaliyeNo = value; }
+        }
+        private Boolean odendiMi;
+        public Boolean OdendiMi
+        {
+            get { return odendiMi; }
+            set { odendiMi = value; }
+        }
+
+        public FaturaKes()
+        {
+            this.odendiMi = false;
+        }
+
+        // ---------------------------------- Fonksiyonlari  -------------------------
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+        public Boolean faturaSatiriEkle()
+        {
+            string sorgu = "INSERT INTO FaturaKes2 (faturaKodu,firmaKodu,urunKodu,satilanMiktar,urunBirimi,birimFiyati,urunYekun,urunKdv,urunToplam,tarih,irsaliyeNo)" +
+                            "VALUES (" + this.faturaNo + "," + this.firmaKodu + ","
+                            + this.urunKodu + "," + this.satilanMiktar + ",'" + this.urunBirimi + "',"
+                            + this.birimFiyati + "," +  this.urunYekun + "," + this.urunKdv + ","
+                            + this.urunToplam + ",'" + this.tarih + "'," + this.irsaliyeNo + ")";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+            
+        }
+
+        public DataTable tumFaturaSatirlariniGetir()
+        {
+            string secme = "select * from FaturaKes2 WHERE faturaKodu="+ this.faturaNo;
+            vt.baglan(secme, "FaturaKes2");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+
+            vt.baglantiKes();
+            return veriTablosu;
+        }
+
+        // ------------------------------------------------------------------------
+
+
+
+    }
+}
