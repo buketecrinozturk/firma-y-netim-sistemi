@@ -1,0 +1,159 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+
+namespace FirmaYonetimSistemi.Class
+{
+    public class Calisan:KisiselBilgiler
+    {
+        // sınıfın değişkenleri
+        private int calisanKodu; 
+        private String dogumYeri;
+        private String dogumTarihi;       
+        private String medeniDurum;
+        private Char cinsiyet;      
+        private String calistigiBirim;       
+        private String calistigiStatu;
+        private String iseBaslamaTarihi;
+
+                
+
+        // sınıfın sahip olduğu nesneler
+        private Sigorta Sigorta;
+        private Maas Maas;
+
+        public Calisan()
+        {
+            
+        }
+
+        VeriTabaniSinifi vt = new VeriTabaniSinifi();
+
+        public DataTable tumCalisanlariGetir()
+        {
+            string secme = "select * from Calisan";
+            vt.baglan(secme, "Calisan");
+            vt.veriTablosu = new DataTable();
+            vt.veriAdaptor.Fill(vt.veriTablosu);
+            DataTable veriTablosu = vt.veriTablosu;
+            vt.baglantiKes();
+            return veriTablosu;
+          
+        }
+
+        public Boolean calisanGetir(String calisanKodu)
+        {
+            string secme = "select * from Calisan where calisanKodu=" + calisanKodu;
+            vt.baglanCommand(secme);
+            if (vt.oku.HasRows == true)
+            {
+                this.CalisanKodu = Convert.ToInt32(calisanKodu); ;
+                this.Adi = vt.oku.GetValue(1).ToString();
+                this.SoyAdi = vt.oku.GetValue(2).ToString();
+                this.Adres = vt.oku.GetValue(3).ToString();
+                this.Telefon = vt.oku.GetValue(4).ToString();
+                this.Gsm = vt.oku.GetValue(5).ToString();
+                this.EPosta = vt.oku.GetValue(6).ToString();
+                this.DogumYeri = vt.oku.GetValue(7).ToString();
+                this.DogumTarihi = vt.oku.GetValue(8).ToString();
+                this.MedeniDurum = vt.oku.GetValue(9).ToString();
+                this.Cinsiyet = Convert.ToChar(vt.oku.GetValue(10));
+                this.CalistigiBirim = vt.oku.GetValue(11).ToString();
+                this.CalistigiStatu = vt.oku.GetValue(12).ToString();
+                this.IseBaslamaTarihi = vt.oku.GetValue(13).ToString(); 
+                this.Tc = vt.oku.GetValue(14).ToString();
+                vt.baglantiKes();
+                return true;
+            }
+            vt.baglantiKes();
+            return false;
+        } // calisanGetir end
+
+        public Boolean calisanEkle()
+        {
+            String dt = Convert.ToString(DogumTarihi);
+            String ibt = Convert.ToString(IseBaslamaTarihi);
+
+            String sorgu = "INSERT INTO Calisan (adi,soyAdi,adres,telefon,gsm,eposta,dogumYeri,dogumTarihi,medeniDurumu,cinsiyet,calistigiBirim,calistigiStatu,iseBaslamaTarihi,tcNo)" +
+                            "VALUES ('" + this.Adi + "','" + this.SoyAdi + "','" + this.Adres + "','"
+                            + this.Telefon + "','" + this.Gsm + "','" + this.EPosta + "','" + this.DogumYeri + "','"
+                            + this.DogumTarihi + "','" + this.MedeniDurum + "','" + this.Cinsiyet + "','" + this.CalistigiBirim + "','"
+                            + this.CalistigiStatu + "','" + this.IseBaslamaTarihi + "','" + this.Tc + "')";
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            
+
+            return true;
+        }
+
+        public Boolean calisanGuncelle()
+        {
+
+            String sorgu = "UPDATE Calisan SET adi='" + this.Adi + "',soyAdi='" + this.SoyAdi +
+                           "',adres='" + this.Adres + "',telefon='" + this.Telefon + "',gsm='" + this.Gsm +
+                           "',eposta='" + this.EPosta + "',dogumYeri='" + this.DogumYeri + "',dogumTarihi='" + this.DogumTarihi +
+                           "',medeniDurumu='" + this.MedeniDurum + "',cinsiyet='" + this.Cinsiyet + "',calistigiBirim='" + this.CalistigiBirim +
+                           "',calistigiStatu='" + this.CalistigiStatu + "',iseBaslamaTarihi='" + this.IseBaslamaTarihi + "',tcNo='" + this.Tc
+                           + "' WHERE calisanKodu=" + this.CalisanKodu;
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+        }
+
+        public Boolean calisanSil()
+        {
+            String sorgu = "DELETE FROM Calisan WHERE calisanKodu=" + this.calisanKodu;
+            vt.baglanEkle(sorgu);
+            vt.baglantiKes();
+            return true;
+
+        }
+
+//-------------------------------------------------------------
+        public int CalisanKodu
+        {
+            get { return calisanKodu; }
+            set { calisanKodu = value; }
+        }
+        public String DogumYeri
+        {
+            get { return dogumYeri; }
+            set { dogumYeri = value; }
+        }
+        public String DogumTarihi
+        {
+            get { return dogumTarihi; }
+            set { dogumTarihi = value; }
+        } 
+
+        public String MedeniDurum
+        {
+            get { return medeniDurum; }
+            set { medeniDurum = value; }
+        }
+        public Char Cinsiyet
+        {
+            get { return cinsiyet; }
+            set { cinsiyet = value; }
+        } 
+
+        public String CalistigiBirim
+        {
+            get { return calistigiBirim; }
+            set { calistigiBirim = value; }
+        }
+        public String CalistigiStatu
+        {
+            get { return calistigiStatu; }
+            set { calistigiStatu = value; }
+        }
+        public String IseBaslamaTarihi
+        {
+            get { return iseBaslamaTarihi; }
+            set { iseBaslamaTarihi = value; }
+        }
+
+    }
+}
